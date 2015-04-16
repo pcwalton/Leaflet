@@ -13,7 +13,7 @@ L.Map = L.Evented.extend({
 		layers: Array,
 		*/
 
-		fadeAnimation: true,
+		fadeAnimation: false,
 		trackResize: true,
 		markerZoomAnimation: true
 	},
@@ -319,9 +319,8 @@ L.Map = L.Evented.extend({
 
 	getSize: function () {
 		if (!this._size || this._sizeChanged) {
-			this._size = new L.Point(
-				this._container.clientWidth,
-				this._container.clientHeight);
+			var rect = this._container.getBoundingClientRect();
+			this._size = new L.Point(rect.right - rect.left, rect.bottom - rect.top);
 
 			this._sizeChanged = false;
 		}
@@ -447,7 +446,7 @@ L.Map = L.Evented.extend({
 	_initLayout: function () {
 		var container = this._container;
 
-		this._fadeAnimated = this.options.fadeAnimation && L.Browser.any3d;
+		this._fadeAnimated = this.options.fadeAnimation;
 
 		L.DomUtil.addClass(container, 'leaflet-container' +
 			(L.Browser.touch ? ' leaflet-touch' : '') +

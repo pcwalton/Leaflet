@@ -177,8 +177,8 @@ L.DomEvent = {
 		var rect = container.getBoundingClientRect();
 
 		return new L.Point(
-			e.clientX - rect.left - container.clientLeft,
-			e.clientY - rect.top - container.clientTop);
+			e.clientX - rect.left,
+			e.clientY - rect.top);
 	},
 
 	getWheelDelta: function (e) {

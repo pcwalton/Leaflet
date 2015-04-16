@@ -71,6 +71,12 @@ L.TileLayer = L.GridLayer.extend({
 
 		tile.src = this.getTileUrl(coords);
 
+		// Servo doesn't support `onload`, so we dispatch the event ourselves immediately.
+		var self = this;
+		setTimeout(function() {
+			self._tileOnLoad(done, tile);
+		}, 0);
+
 		return tile;
 	},
 

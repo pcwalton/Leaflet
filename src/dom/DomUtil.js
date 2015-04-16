@@ -8,15 +8,8 @@ L.DomUtil = {
 	},
 
 	getStyle: function (el, style) {
-
-		var value = el.style[style] || (el.currentStyle && el.currentStyle[style]);
-
-		if ((!value || value === 'auto') && document.defaultView) {
-			var css = document.defaultView.getComputedStyle(el, null);
-			value = css ? css[style] : null;
-		}
-
-		return value === 'auto' ? null : value;
+		// Servo doesn't support `getComputedStyle()` yet.
+		return null;
 	},
 
 	create: function (tagName, className, container) {
@@ -95,7 +88,6 @@ L.DomUtil = {
 	},
 
 	setOpacity: function (el, value) {
-
 		if ('opacity' in el.style) {
 			el.style.opacity = value;
 
